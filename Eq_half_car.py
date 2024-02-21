@@ -1,4 +1,5 @@
-from scipy import interpolate
+# Half-car model equations of motion
+# Excitation in the form of road profile from file
 import math as m 
 g = 9.81
 
