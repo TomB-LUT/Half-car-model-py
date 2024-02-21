@@ -1,11 +1,8 @@
-import sys
-import os
+# This program generates random road profile for the simulation and save it as a .txt file (and plot it additionally)
 import math as m
 import random
 import numpy as np
 import matplotlib.pyplot as plt
-path = os.path.abspath("D:/Konrad/")
-sys.path.append(path)
 from TBU_functions import zapisz_txt
 
 # Vehicle Variables
@@ -51,23 +48,22 @@ t0=0
 tf = x[-1]/v
 delay=L/80
 
+#Define "time" for generating road profile
 ttf = [x/v for x in x]  
-ttr = [x-delay for x in ttf]
+#ttr = [x-delay for x in ttf]
 
-hr = np.empty([1,len(ttf)])#zeros(size(x))
+#Initialize numpy array for road profile
 hf = np.empty([1,len(ttf)])
+#hr = np.empty([1,len(ttf)])
 
+# Create and save road profile to numpy array
 for i in range (len(ttf)):
-    hr[0,i] = sum( np.array(Amp1) * np.cos( np.array(n) * 2*m.pi * ttr[i] + np.array(phi))) 
     hf[0,i] = sum( np.array(Amp1) * np.cos( np.array(n) * 2*m.pi * ttf[i] + np.array(phi))) 
+    #hr[0,i] = sum( np.array(Amp1) * np.cos( np.array(n) * 2*m.pi * ttr[i] + np.array(phi))) 
 
-zapisz_txt(hr[0,:].tolist()," ","Rear road.txt")
-zapisz_txt(hf[0,:].tolist(), " ", "Front road.txt")
+zapisz_txt(hf[0,:].tolist(), " ", "Front_road.txt")
+#zapisz_txt(hr[0,:].tolist()," ","Rear_road.txt")
 
 plt.plot(ttf,hf[0,:])    
-plt.plot(ttr,hr[0,:])
 plt.show()
-
-#s_time=RoadL/v
-#tspan=[t0,tf]
-#step=s_time/N*2*2   
+ 
