@@ -1,3 +1,5 @@
+# This program is importing vehicle silhouette from .png file and save it as a numpy array in order to create an animation 
+
 import numpy as np
 import matplotlib.pyplot as plt 
 import cv2

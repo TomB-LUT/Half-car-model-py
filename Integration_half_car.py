@@ -1,3 +1,6 @@
+# This program is integrating equations of motion defined in the file Eq_half_car.py. It also creates an animation and 
+# save it as a gif file
+
 from Eq_half_car import f
 import math as m
 from scipy.integrate import ode
@@ -19,8 +22,6 @@ x4 = []
 x4_dot = []
 Front_exct_num = []
 Front_exct = []
-Rear_exct = []
-time_road = []
 
 n = 0
 
@@ -75,7 +76,7 @@ Front_exct_num_new = [x*tk/Front_exct_num[-1] for x in Front_exct_num]
 road_func = interp1d(Front_exct_num_new,Front_exct,fill_value='extrapolate')
 
 r = ode(f).set_integrator('dopri5')
-r.set_initial_value(y0,t0).set_f_params(kf, lf, kt, cf, m1f,kr, lr, cr, m1r, m2, J, road_func, time_road, 0.20)
+r.set_initial_value(y0,t0).set_f_params(kf, lf, kt, cf, m1f,kr, lr, cr, m1r, m2, J, road_func, 0.20)
 
 while r.successful and r.t <= tk:
     r.integrate(r.t+dt)
@@ -87,15 +88,15 @@ while r.successful and r.t <= tk:
     x2_dot.append(r.y[3])
     x3.append(r.y[4])       #Body vertical
     x3_dot.append(r.y[5])
-    x4.append(r.y[6])       #Body
+    x4.append(r.y[6])       #Body pitch
     x4_dot.append(r.y[7])
 
 
-plt.plot(t_sim,x4)
+#plt.plot(t_sim,x1)
 #plt.plot(t_sim,x2)
-plt.xlabel('t [s]')
-plt.legend(["Front wheel disp","Rear wheel disp"])
-plt.show()
+#plt.xlabel('t [s]')
+#plt.legend(["Front wheel disp","Rear wheel disp"])
+#plt.show()
 
 # Animations
 
@@ -103,10 +104,6 @@ writer = PillowWriter(fps = 30)
 roadall = [x*v for x in t_sim]
 
 fig = plt.figure()
-
-#for i in range(len(t_sim)):
-#    Body = preprocess()
-#    animate(x3[0],Body, lr, lf, x4[i], x3[i], x1[i], x2[i], t_sim[i], road_func(t_sim),roadall, roadall[i])
 with writer.saving(fig, "Vehicle_animation.gif", 100):
     for i in range(len(t_sim)):
         Body = preprocess()

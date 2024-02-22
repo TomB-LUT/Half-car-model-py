@@ -3,7 +3,7 @@
 import math as m 
 g = 9.81
 
-def f(t,y, kf, lf, kt, cf, m1f,kr, lr, cr, m1r, m2, J, road_func, time_road_new, w):
+def f(t,y, kf, lf, kt, cf, m1f,kr, lr, cr, m1r, m2, J, road_func, w):
     delay = 2.5/80
     Front_exct_temp = road_func(t)
     Rear_exct_temp = road_func(t-delay)
