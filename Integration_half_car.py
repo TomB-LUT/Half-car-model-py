@@ -107,7 +107,7 @@ fig = plt.figure()
 #for i in range(len(t_sim)):
 #    Body = preprocess()
 #    animate(x3[0],Body, lr, lf, x4[i], x3[i], x1[i], x2[i], t_sim[i], road_func(t_sim),roadall, roadall[i])
-with writer.saving(fig, "My_gif.gif", 100):
+with writer.saving(fig, "Vehicle_animation.gif", 100):
     for i in range(len(t_sim)):
         Body = preprocess()
         animate(x3[0],Body, lr, lf, x4[i], x3[i], x1[i], x2[i], t_sim[i], road_func(t_sim),roadall, roadall[i])
